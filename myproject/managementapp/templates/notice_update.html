@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% load static %} <!--static을 올려라 -->
-<script src="{% static '/js/trim.js'%}"></script> 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,6 +61,8 @@
       color:white;
     }
   </style>
+{% load static %} <!--static을 올려라 -->
+<script src="{% static '/js/trim.js'%}"></script> 
 </head>
 <body>
   <div class="edit-notice-container">
@@ -87,7 +87,7 @@
         <textarea id="content" name="content" rows="5" required>{{document.content}}</textarea>
       </div>
       <div class="button-container">
-        <button class="buttons" onclick="location.href='../delete/{{document.id}}'">글 삭제</button>
+        <button type ='button' class="buttons" onclick="location.href='../delete/{{document.id}}'">글 삭제</button>
         <button class="buttons" >저장</button>
         <button class="buttons" onclick="window.history.back()">뒤로가기</button>
       </div>

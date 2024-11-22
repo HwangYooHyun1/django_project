@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>천재 교육센터 로그인</title>
+    <link rel="stylesheet" href="{% static 'css/loginstyles.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <h1>천재 IT 교육센터</h1>
+        <p>천재교육 IT 센터에 오신 것을 환영합니다!</p>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+        <form method="POST" action="login_ok/" method="post">
+            {% csrf_token %}
+            <input type="text" name="email" class="input-field" placeholder="이메일" required>
+            <input type="password" name="pwd" class="input-field" placeholder="비밀번호" required>
+            <button type="submit" class="login-button" onclick="check()">로그인</button>
+        </form>
+    </div>
+    <script src="{% static 'js/trim.js' %}"></script>
+</body>
+</html>

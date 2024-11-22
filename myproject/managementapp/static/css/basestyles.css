@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  /* 전체 레이아웃 */
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%; /* 화면 전체 너비를 차지 */
+    position: relative;
+    box-shadow: none; /* 아래쪽에만 그림자 추가 */
+  }
+
+  /* Sidebar 스타일 */
+  .sidebar {
+    background-color: #bfd6f6;
+    width: 250px;
+    height: 100vh; /* 화면 전체 높이를 차지 */
+    position: fixed; /* 화면 왼쪽에 고정 */
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1; /* 상단바 및 메인 콘텐츠 위에 배치 */
+  }
+  .profile {
+    width: 80px;
+    height: 80px;
+    background-color: #ddd;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+  .menu {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+  }
+  .menu li {
+    margin: 15px 0;
+  }
+  .menu a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 5px;
+  }
+  .menu a:hover {
+    background-color: #e8f0ff;
+  }
+
+  /* Header 스타일 */
+  .header {
+    background-color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    box-shadow:0 2px 4px rgba(0, 0, 0, 0.05); /* 검은 줄 제거 */
+    z-index: 2; /* sidebar 위로 배치 */
+    margin-left: 250px; /* Sidebar를 피해서 배치 */
+  }
+  .header .account {
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    align-items: center;
+  }
+  .header .account:hover {
+    color: #000;
+  }
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    width: 150px;
+  }
+  .dropdown a {
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+  }
+  .dropdown a:hover {
+    background-color: #f0f0f0;
+  }
+
+  /* 메인 콘텐츠 영역 */
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-left: 250px; /* Sidebar를 피해서 배치 */
+    padding: 20px;
+  }
