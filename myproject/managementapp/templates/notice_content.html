@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="notice-detail-container">
+  <!-- 공지사항 제목 -->
+  <h1 class="notice-title">{{document.title}}</h1>
+  
+  <!-- 공지사항 정보 (가로배치 및 오른쪽 정렬) -->
+  <div class="notice-info">
+    <p>{{document.writer}}</p>
+    <p>|</p>
+    <p>{{document.rdate}}</p>
+    <p>|</p>
+    <p>{{document.view_count}}</p>
+  </div>
+  
+  <br/><br/>
+  <!-- 공지사항 내용 -->
+  <div class="notice-content">{{document.content}}</div>
+
+  <!-- 뒤로가기 버튼 -->
+  <div class="button-container">
+    <button class="buttons" onclick="location.href='../delete/{{document.id}}'">수정</button>
+    <button class="buttons" onclick="history.back()">페이지 뒤로가기</button>
+  </div>
+</div>
+
+<style>
+  .notice-detail-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .notice-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .notice-info {
+    display: flex;
+    justify-content: flex; /* 오른쪽 정렬 */
+    gap: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc; /* 하단 밑줄 추가 */
+    padding-bottom: 3px; /* 밑줄과 내용 간격 */
+  }
+
+  .notice-info p {
+    color: #888;
+    font-size: 14px;
+  }
+
+  .notice-content {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+  }
+
+  .button-container {
+    margin-top: 20px;
+    text-align: right;
+    justify-content: flex-end;
+  }
+
+  .buttons {
+    background-color: #DEE8FF;
+    color: #3788D8;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .buttons:hover {
+    background-color: #3788D8;
+    color:#FFF;
+  }
+</style>
+{% endblock %}

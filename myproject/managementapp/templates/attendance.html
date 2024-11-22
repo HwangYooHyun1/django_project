@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content">
+  <h2>출결 관리</h2>
+  <p class='h'>증빙 서류 안내사항</p>
+  <!-- 공지사항 테이블 -->
+  <div class="notice">
+    <table>
+      <thead>
+        <tr>
+          <th>no</th>
+          <th>제목</th>
+          <th>작성일</th>
+          <th>작성자</th>
+          <th>파일</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>필독</td>
+          <td>수업장소 변경 안내</td>
+          <td>2024-11-04</td>
+          <td>관리자</td>
+          <td>📄 1</td>
+        </tr>
+        <tr>
+          <td>필독</td>
+          <td>준비물 안내 사항</td>
+          <td>2024-11-04</td>
+          <td>관리자</td>
+          <td>📄 1</td>
+        </tr>
+        <tr>
+          <td>필독</td>
+          <td>천재 IT 교육센터 실습규정</td>
+          <td>2024-11-04</td>
+          <td>관리자</td>
+          <td>📄 1</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>에듀테크 드림! 혁신적 개발 기술 2가지</td>
+          <td>2024-11-04</td>
+          <td>관리자</td>
+          <td>📄 1</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="content">
+    <p>요청 처리 내역</p>
+    <!-- 공지사항 테이블 -->
+    <div class="notice">
+      <table>
+        <thead>
+          <tr>
+            <th>no</th>
+            <th>제목</th>
+            <th>작성일</th>
+            <th>작성자</th>
+            <th>파일</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>필독</td>
+            <td>수업장소 변경 안내</td>
+            <td>2024-11-04</td>
+            <td>관리자</td>
+            <td>📄 1</td>
+          </tr>
+          <tr>
+            <td>필독</td>
+            <td>준비물 안내 사항</td>
+            <td>2024-11-04</td>
+            <td>관리자</td>
+            <td>📄 1</td>
+          </tr>
+          <tr>
+            <td>필독</td>
+            <td>천재 IT 교육센터 실습규정</td>
+            <td>2024-11-04</td>
+            <td>관리자</td>
+            <td>📄 1</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>에듀테크 드림! 혁신적 개발 기술 2가지</td>
+            <td>2024-11-04</td>
+            <td>관리자</td>
+            <td>📄 1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 페이지네이션 -->
+    <div class="pagination">
+        <button type="button">1</button>
+    </div>
+
+    <div class="attendinput">
+        <button type="button">출결 사항 입력</button>
+    </div>
+
+
+<style>
+  .content {
+    padding: 20px;
+    
+  }
+  .notice-table {
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  th, td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #f1f1f1;
+  }
+
+  th {
+    background-color: #f9f9f9;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #fefefe;
+  }
+
+  .pagination {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .pagination button {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    background-color: white;
+    cursor: pointer;
+  }
+
+  .attendinput {
+    position: fixed;  /* 화면에 고정되도록 설정 */
+    bottom: 130px;  /* 화면 위에서의 거리 */
+    right: 35px;  /* 화면 오른쪽에서의 거리 */
+    z-index: 1000;  /* 버튼이 다른 요소들 위에 오도록 설정 */
+  }
+
+  .attendinput button {
+    padding: 15px 15px;
+    background-color: #DEE8FF;  /* 붉은색 배경 */
+    color: #3788D8;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .attendinput button:hover {
+    background-color: #3788D8;  /* 버튼에 마우스를 올렸을 때 색상 변경 */
+    color:white;
+  }
+</style>
+{% endblock %}
