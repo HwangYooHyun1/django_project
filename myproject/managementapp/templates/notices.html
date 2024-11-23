@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/notices.css' %}">
 <div class="content">
   <h2>전체 공지사항</h2>
   <p>전체 4건의 결과</p>
   
   <!-- 검색창 -->
   <div class="search-bar">
-    <input type="text" placeholder="제목 입력">
-    <button type="button">검색</button>
+    <form action="../notice_search" method="GET">
+      <input type="text" name='search' placeholder="제목 입력">
+      <button type="submit">검색</button>
+    </form>
   </div>
 
   <!-- 공지사항 테이블 -->
@@ -27,7 +30,7 @@
         {%for document in documents%}
         <tr>
           <td>{{document.id}}</td>
-          <td><a href="content/{{document.id}}">{{document.title}}</a></td>
+          <td><a href="../notices/content/{{document.id}}">{{document.title}}</a></td>
           <td>{{document.rdate}}</td>
           <td>{{document.writer}}</td>
           <td>{{document.view_count}}</td>
@@ -41,78 +44,6 @@
   <div class="pagination">
     <button type="button">1</button>
   </div>
+
 </div>
-
-<style>
-  .content {
-    padding: 20px;
-  }
-
-  .search-bar {
-    margin: 20px 0;
-    display: flex;
-    justify-content: flex-end; /* 검색창을 오른쪽으로 정렬 */
-    gap: 10px;
-  }
-
-  .search-bar input {
-    padding: 10px;
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-  .search-bar button {
-    padding: 10px 20px;
-    background-color: #DEE8FF;
-    color: #3788D8;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .notice-table {
-    margin-top: 20px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  th, td {
-    text-align: left;
-    padding: 10px;
-    border-bottom: 1px solid #f1f1f1;
-  }
-
-  th {
-    background-color: #f9f9f9;
-  }
-
-  tbody tr:nth-child(even) {
-    background-color: #fefefe;
-  }
-
-  .title-column {
-    width: 50%; /* 제목 열이 전체의 2/3을 차지하도록 설정 */
-  }
-
-
-  .pagination {
-    margin: 20px 0;
-    display: flex;
-    justify-content: center;
-  }
-
-  .pagination button {
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-    background-color: white;
-    cursor: pointer;
-  }
-</style>
 {% endblock %}

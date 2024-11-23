@@ -25,6 +25,7 @@ def login_ok(request):
         if member.pwd==pwd:
             result=2
             request.session['login_ok_user'] = member.email
+            request.session['login_user_name'] = member.name
         else:
             result=1
     else:
@@ -34,7 +35,6 @@ def login_ok(request):
     context = {
         'result': result
     }
-
     
     return HttpResponse(template.render(context,request))
 
@@ -54,6 +54,23 @@ def home(request):
 def notices(request):
     template = loader.get_template('notices.html')
     documents = Documents.objects.all()
+    context = {
+        'documents':documents
+    }
+    return HttpResponse(template.render(context,request))
+
+def notice_search(request):
+    template = loader.get_template('notices.html')
+    print('LOAD NOTICE SEARCH')
+    search = request.GET.get('search','') #기본값 = ''
+    print('search:',search)
+    if search:
+        #title_icontains: 대소문자 구분없이 문자열이 존재하는지 확인
+        documents = Documents.objects.filter(title__icontains=search)
+        print('documents 필터링됨')
+    else:
+        documents = Documents.objects.all()
+        print('documents 전체')
     context = {
         'documents':documents
     }

@@ -1,0 +1,75 @@
+.content {
+    padding: 20px;
+  }
+
+  .search-bar {
+    margin: 20px 0;
+    display: flex;
+    justify-content: flex-end; /* 검색창을 오른쪽으로 정렬 */
+    gap: 10px;
+  }
+
+  .search-bar input {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .search-bar button {
+    padding: 10px 20px;
+    background-color: #DEE8FF;
+    color: #3788D8;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .search-bar button:hover {
+    background-color: #4a44d4;
+    color: white;
+  }
+
+  .notice-table {
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #f1f1f1;
+  }
+
+  th {
+    background-color: #f9f9f9;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #fefefe;
+  }
+
+  .title-column {
+    width: 50%; /* 제목 열이 전체의 2/3을 차지하도록 설정 */
+  }
+
+
+  .pagination {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .pagination button {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    background-color: white;
+    cursor: pointer;
+  }

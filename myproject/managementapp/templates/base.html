@@ -5,28 +5,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}기본 제목{% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'css/basestyles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 <body>
   <div class="container">
     <!-- Sidebar -->
     <div class="sidebar">
       <div class="profile"></div>
-      <h2>PM 8기<br>황유현</h2>
+      {% if request.session.login_ok_user %}
+      <h2>PM 8기<br>{{request.session.login_user_name}}</h2>
+      {% endif %}
       <ul class="menu">
-        <li><a href="../home">홈</a></li>
-        <li><a href="../notices">전체 공지사항</a></li>
-        <li><a href="../classroom">클래스룸</a></li>
-        <li><a href="../attendance">출결 관리</a></li>
+        <li><a href="../../home">홈</a></li>
+        <li><a href="../../notices">전체 공지사항</a></li>
+        <li><a href="../../classroom">클래스룸</a></li>
+        <li><a href="../../attendance">출결 관리</a></li>
       </ul>
     </div>
 
     <!-- Header -->
     <div class="header">
       <div class="account" onclick="toggleDropdown()">
-        dbgus0519 님 ▼
+        {{request.session.login_user_name}} 님 ▼
         <div class="dropdown" id="dropdown-menu">
-          <a href="../logout">로그아웃</a>
+          {%if request.session.login_ok_user %}
+          <a href="../logout" >로그아웃</a>
+          {%else%}
+          <a href="../login" >로그인</a>
+          {%endif%}
         </div>
       </div>
     </div>

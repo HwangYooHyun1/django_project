@@ -10,6 +10,7 @@ urlpatterns = [
     path('home/',views.home, name='home'),
     #notices
     path('notices/',views.notices, name='notices'),
+    path('notice_search/',views.notice_search, name='notice_search'),
     path('notices/content/<int:id>',views.notice_content, name='notice_content'),
     path('notices/update/<int:id>',views.notice_update, name='notice_update'),
     path('notices/notice_update_ok/<int:id>',views.notice_update_ok, name='notice_update_ok'),
