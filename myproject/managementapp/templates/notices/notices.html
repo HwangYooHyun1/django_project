@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/list.css' %}">
+<div class="content">
+  <h2>전체 공지사항</h2>
+  <p>전체 {{count}}건의 결과</p>
+  
+  <!-- 검색창 -->
+  <div class="search-bar">
+    <form action="../notice_search" method="GET">
+      <input type="text" name='search' placeholder="제목 입력">
+      <button type="submit">검색</button>
+    </form>
+  </div>
+
+  <!-- 공지사항 테이블 -->
+  <div class="notice-table">
+    <table>
+      <thead>
+        <tr>
+          <th>no</th>
+          <th class="title-column">제목</th>
+          <th>작성일</th>
+          <th>작성자</th>
+          <th>조회 수</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%for document in documents%}
+        <tr>
+          <td>{{document.id}}</td>
+          <td><a href="../notices/content/{{document.id}}" style="text-decoration:none" >{{document.title}}</a></td>
+          <td>{{document.rdate}}</td>
+          <td>{{document.writer}}</td>
+          <td>{{document.view_count}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 페이지네이션 -->
+  <div class="pagination">
+    <button type="button">1</button>
+  </div>
+  <div class="button-container">
+    <button class="buttons" type="button" onclick="location.href='write'">글 생성</button>
+  </div>
+
+</div>
+{% endblock %}

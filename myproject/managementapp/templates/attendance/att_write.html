@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %} 
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/write.css' %}">
+<script src="{% static '/js/trim.js'%}"></script> 
+<body>
+  <div class="edit-notice-container">
+    <h1>출결 관련 신청란</h1>
+
+    <form name="input" action="../write_ok" method="POST">
+    {% csrf_token %} 
+      <div class="form-group">
+        <label>작성자 : {{request.session.login_user_name}}</label>
+        </div>
+      <div class="form-group">
+        <label for="title">신청 유형</label>
+        <select name="request_type" id="request_type">
+            <option value="휴가">휴가</option>
+            <option value="결석">결석</option>
+            <option value="지각">지각</option>
+            <option value="병가">병가</option>
+            <option value="조퇴">조퇴</option>
+            <option value="예비군">예비군</option>
+            <option value="입사 시험">입사 시험</option>
+            <option value="입사 면접">입사 면접</option>
+            <option value="자격증">자격증</option>
+            <option value="사망">사망</option>
+            <option value="외출">외출</option>
+            <option value="실업 급여 관련 출석">실업 급여 관련 출석</option>
+            <option value="기타">기타</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="content">신청일</label>
+        <input type="date" name="request_date" ></input>
+      </div>
+      <div class="form-group">
+        <label for="content">내용</label>
+        <textarea id="content" name="content" rows="5" required></textarea>
+      </div>
+      <div class="form-group">
+        <div class="custom-file-upload">
+            <label for="file-upload" class="file-upload-label">파일 선택</label>
+            <input id="files" type="file" name="files" accept=".pdf,.doc,.docx,.jpg,.png,.zip,.rar" />
+        </div>
+    </div>
+      <div class="button-container">
+        <button class="cancel-button" onclick="window.history.back()">작성 취소</button>
+        <button class="confirm-button" onclick="check()">제출</button>
+      </div>
+    </form>
+  </div>
+</body>
+{% endblock %}

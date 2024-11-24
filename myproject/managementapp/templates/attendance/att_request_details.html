@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{%load static%}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/content.css' %}">
+<div class="notice-detail-container">
+  <!-- 제목 -->
+  <h1 class="notice-title">{{requests.title}}</h1>
+  
+  <!-- 요청 사항 세부 내용 (가로배치 및 오른쪽 정렬) -->
+  <div class="notice-info">
+    <p>{{requests.writer}}</p>
+    <p>|</p>
+    <p>{{requests.rdate}}</p>
+  </div>
+  
+  <br/><br/>
+  <div class="notice-content">{{requests.request_date}}</div>
+  <div class="notice-content">{{requests.request_type}}</div>
+  <div class="notice-content">{{requests.content}}</div>
+  <div class="notice-content">{{requests.approval}}</div>
+
+  <!-- 뒤로가기 버튼 -->
+  <div class="button-container">
+    <button class="buttons" onclick="location.href='../update/{{document.id}}'">수정</button>
+    <button class="buttons" onclick="location.href='../'">페이지 뒤로가기</button>
+  </div>
+</div>
+
+{% endblock %}

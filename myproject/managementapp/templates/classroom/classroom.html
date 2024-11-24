@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/notices.css' %}">
+<link rel="stylesheet" href="{% static 'css/list.css' %}">
 <div class="content">
-  <h2>전체 공지사항</h2>
-  <p>전체 4건의 결과</p>
+  <h2>클래스룸</h2>
+  <p>전체 {{count}}건의 결과</p>
   
   <!-- 검색창 -->
   <div class="search-bar">
-    <form action="../notice_search" method="GET">
+    <form action="../classroom_search" method="GET">
       <input type="text" name='search' placeholder="제목 입력">
       <button type="submit">검색</button>
     </form>
@@ -21,19 +21,21 @@
         <tr>
           <th>no</th>
           <th class="title-column">제목</th>
+          <th>마감일</th>
           <th>작성일</th>
           <th>작성자</th>
           <th>조회 수</th>
         </tr>
       </thead>
       <tbody>
-        {%for document in documents%}
+        {%for assignment in assignments %}
         <tr>
-          <td>{{document.id}}</td>
-          <td><a href="../notices/content/{{document.id}}">{{document.title}}</a></td>
-          <td>{{document.rdate}}</td>
-          <td>{{document.writer}}</td>
-          <td>{{document.view_count}}</td>
+          <td>{{assignment.id}}</td>
+          <td><a href="../classroom/content/{{assignment.id}}"  style="text-decoration:none" >{{assignment.title}}</a></td>
+          <td>{{assignment.deadline}}</td>
+          <td>{{assignment.rdate}}</td>
+          <td>{{assignment.writer}}</td>
+          <td>{{assignment.view_count}}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -43,6 +45,9 @@
   <!-- 페이지네이션 -->
   <div class="pagination">
     <button type="button">1</button>
+  </div>
+  <div class="'button-container">
+    <button class='buttons' type="button" onclick="location.href='write'" >과제 작성</button>
   </div>
 
 </div>

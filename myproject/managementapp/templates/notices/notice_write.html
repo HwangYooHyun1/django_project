@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %} 
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/write.css' %}">
+<script src="{% static '/js/trim.js'%}"></script> 
+<body>
+  <div class="edit-notice-container">
+    <h1>공지사항 작성</h1>
+
+    <form name="input" action="../write_ok" method="POST">
+    {% csrf_token %} 
+      <div class="form-group">
+        <label>작성자</label>
+          <p>{{request.session.login_user_name}}</p> <!-- 작성자는 수정 불가 -->
+        </div>
+      <div class="form-group">
+        <label for="title">제목</label>
+        <textarea type="text" id="title" name="title" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="content">내용</label>
+        <textarea id="content" name="content" rows="5" required></textarea>
+      </div>
+      <div class="button-container">
+        <button class="cancel-button" onclick="window.history.back()">작성 취소</button>
+        <button class="confirm-button" onclick="check()">저장</button>
+      </div>
+    </form>
+  </div>
+</body>
+{% endblock %}

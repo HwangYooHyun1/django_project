@@ -73,3 +73,24 @@
     background-color: white;
     cursor: pointer;
   }
+
+  .button-container {
+    margin-top: 20px;
+    text-align: right;
+    justify-content: flex-end; 
+  }
+
+  .buttons {
+    float: right;
+    background-color: #DEE8FF;
+    color: #3788D8;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .buttons:hover {
+    background-color: #3788D8;
+    color:#FFF;
+  }

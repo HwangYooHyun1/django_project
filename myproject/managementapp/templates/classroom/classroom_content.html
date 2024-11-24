@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{%load static%}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/content.css' %}">
+<link rel="stylesheet" href="{% static 'css/comment.css' %}">
+
+<div class="notice-detail-container">
+  <!-- 과제 제목 -->
+  <h1 class="notice-title">{{assignment.title}}</h1>
+  
+  <!-- 과제 정보 (가로배치 및 오른쪽 정렬) -->
+  <div class="notice-info">
+    <p>{{assignment.writer}}</p>
+    <p>|</p>
+    <p>{{assignment.rdate}}</p>
+    <p>|</p>
+    <p>{{assignment.view_count}}</p>
+  </div>
+  <div>
+    <p>마감일: {{assignment.deadline}}</p>
+  </div>
+
+  
+  <br/><br/>
+  <!-- 과제 내용 -->
+  <div class="notice-content">{{assignment.content}}</div>
+</div>
+
+<div class="comments-container">
+    <h3>댓글</h3>
+    
+    <!-- 댓글 목록 -->
+    <div class="comments-list">
+      {% for comment in comments %}
+        <div class="comment">
+          <p><strong>{{ comment.author }}</strong> | {{ comment.udate }}</p>
+          <p>{{ comment.content }}</p>
+        </div>
+        <hr />
+    </div>
+    {%endfor%}
+    <!-- 댓글 입력 폼 -->
+    <form method="POST" action="classroom_comment" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="file-upload-container">
+            <div class="custom-file-upload">
+                <label for="file-upload" class="file-upload-label">파일 선택</label>
+                <input id="file-upload" type="file" name="file" accept=".pdf,.doc,.docx,.jpg,.png,.zip,.rar" />
+            </div>
+            <button type="submit" class="buttons">등록</button>
+        </div>
+    </form>
+    </form>
+
+    <!-- 뒤로가기 버튼 -->
+    <div class="button-container">
+        <button class="buttons" onclick="location.href='../update/{{assignment.id}}'">수정</button>
+        <button class="buttons" onclick="location.href='../'">페이지 뒤로가기</button>
+    </div>
+</div>
+
+{% endblock %}

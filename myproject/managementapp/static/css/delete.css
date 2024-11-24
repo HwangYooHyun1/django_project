@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f9;
+  }
+
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display:none;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease-in-out;
+    z-index: 1000;
+  }
+
+  .popup-overlay.active {
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .popup-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+
+  .popup-box h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .popup-box p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #555;
+  }
+
+  .popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .popup-buttons button {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .confirm-button {
+    background-color: #FFD6D6; 
+    color: #D83939; 
+  }
+  
+  .confirm-button:hover {
+    background-color: #D83939; 
+    color: #FFFFFF;
+  }
+
+  .cancel-button {
+    background-color: #DEE8FF;
+    color: #3788D8;
+  }
+
+  .cancel-button:hover {
+    background-color: #3788D8;
+    color:#FFF;
+  }

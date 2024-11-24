@@ -1,0 +1,68 @@
+.edit-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  input[type="text"], textarea {
+    width: 95%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+
+  .button-container {
+    margin-top: 20px;
+    text-align: right;
+  }
+
+  .button-container .cancel-button {
+    background-color: #FFD6D6; 
+    color: #D83939; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .button-container .cancel-button:hover {
+    background-color: #D83939; 
+    color: #FFFFFF;
+  }
+
+  .button-container .confirm-button {
+    background-color: #DEE8FF;
+    color: #3788D8;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .button-container .confirm-button:hover {
+    background-color: #3788D8;
+    color:#FFF;
+  }

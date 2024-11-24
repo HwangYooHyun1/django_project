@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %} <!--static을 올려라 -->
+<link rel="stylesheet" href="{% static 'css/update.css' %}">
+<script src="{% static '/js/trim.js'%}"></script> 
+</head>
+<body>
+  <div class="edit-container">
+    <h1>과제 수정</h1>
+
+    <form action="../classroom_update_ok/{{assignment.id}}" method="POST">
+    {% csrf_token %} 
+      <div class="form-group">
+        <label>작성자</label>
+          <p>{{assignment.writer}}</p> <!-- 작성자는 수정 불가 -->
+        </div>
+      <div class="form-group">
+          <p>작성일</p> <!-- 작성일은 수정 불가 -->
+          <label>{{assignment.udate}}</label>
+        </div>
+      <div class="form-group">
+        <label for="title">제목</label>
+        <textarea type="text" id="title" name="title" required>{{assignment.title}}</textarea>
+      </div>
+      <div class="form-group">
+        <label for="content">내용</label>
+        <textarea id="content" name="content" rows="5" required>{{assignment.content}}</textarea>
+      </div>
+      <div class="form-group">
+        <label for="content">마감일</label>
+        <input type="date" name="deadline" value="{{ assignment.deadline}}" ></input>
+      </div>
+      <div class="button-container">
+        <button type ='button' class="cancel-button" onclick=showPopup()>글 삭제</button>
+        <button class="confirm-button" >저장</button>
+        <button class="confirm-button" onclick="window.history.back()">뒤로가기</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+
+<link rel="stylesheet" href="{% static 'css/delete.css' %}">
+<div>
+  <!-- 팝업 -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup-box">
+      <p>정말로 이 글을 삭제하시겠습니까?</p>
+      <div class="popup-buttons">
+        <button class="confirm-button" onclick="location.href='../delete/{{assignment.id}}'">삭제</button>
+        <button class="cancel-button" onclick="hidePopup()">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const popup = document.getElementById('popup');
+
+  function showPopup() {
+    popup.classList.add('active');
+  }
+
+  function hidePopup() {
+    popup.classList.remove('active');
+  }
+
+</script>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/list.css' %}">
+<div class="content">
+  <h2>출결 관리</h2>
+  <p class='h'>안내 사항</p>
+  <!-- 공지사항 테이블 -->
+  <div class="notice-table">
+    <table>
+      <thead>
+        <tr>
+          <th>no</th>
+          <th class="title-column">제목</th>
+          <th>작성일</th>
+          <th>작성자</th>
+          <th>조회수</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for notice in notices %}
+        <tr>
+          <td>{{notice.id}}</td>
+          <td ><a href="../attendance/notice_content/{{notice.id}}" style="text-decoration:none">{{notice.title}}</a></td>
+          <td>{{notice.rdate}}</td>
+          <td>{{notice.writer}}</td>
+          <td>{{notice.view_count}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="content">
+    <p>요청 처리 내역</p>
+    <!-- 공지사항 테이블 -->
+    <div class="notice-table">
+      <table>
+        <thead>
+          <tr>
+            <th>no</th>
+            <th class="title-column">제목</th>
+            <th>작성일</th>
+            <th>처리 상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for request in requests%}
+          <tr>
+            <td>{{request.id}}</td>
+            <td><a  href="../attendance/requestdetails/{{request.id}}" style="text-decoration:none">{{request.title}}</a></td>
+            <td>{{request.rdate}}</td>
+            <td>{{request.approval}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 페이지네이션 -->
+    <div class="pagination">
+        <button type="button">1</button>
+    </div>
+
+    <div class="button-container">
+        <button class='buttons' type="button" onclick="location.href='write'">출결 사항 입력</button>
+    </div>
+
+{% endblock %}

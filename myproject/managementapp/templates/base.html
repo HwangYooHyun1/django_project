@@ -13,7 +13,7 @@
     <div class="sidebar">
       <div class="profile"></div>
       {% if request.session.login_ok_user %}
-      <h2>PM 8기<br>{{request.session.login_user_name}}</h2>
+      <h2>{{request.session.login_user_generation}}<br>{{request.session.login_user_name}}</h2>
       {% endif %}
       <ul class="menu">
         <li><a href="../../home">홈</a></li>

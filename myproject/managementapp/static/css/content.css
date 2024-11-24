@@ -1,32 +1,4 @@
-{% extends "base.html" %}
-
-{% block content %}
-<div class="notice-detail-container">
-  <!-- 공지사항 제목 -->
-  <h1 class="notice-title">{{document.title}}</h1>
-  
-  <!-- 공지사항 정보 (가로배치 및 오른쪽 정렬) -->
-  <div class="notice-info">
-    <p>{{document.writer}}</p>
-    <p>|</p>
-    <p>{{document.rdate}}</p>
-    <p>|</p>
-    <p>{{document.view_count}}</p>
-  </div>
-  
-  <br/><br/>
-  <!-- 공지사항 내용 -->
-  <div class="notice-content">{{document.content}}</div>
-
-  <!-- 뒤로가기 버튼 -->
-  <div class="button-container">
-    <button class="buttons" onclick="location.href='../update/{{document.id}}'">수정</button>
-    <button class="buttons" onclick="history.back()">페이지 뒤로가기</button>
-  </div>
-</div>
-
-<style>
-  .notice-detail-container {
+.notice-detail-container {
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -62,10 +34,11 @@
   .button-container {
     margin-top: 20px;
     text-align: right;
-    justify-content: flex-end;
+    justify-content: flex-end; 
   }
 
   .buttons {
+    display: inline-block;
     background-color: #DEE8FF;
     color: #3788D8;
     padding: 10px 20px;
@@ -78,5 +51,3 @@
     background-color: #3788D8;
     color:#FFF;
   }
-</style>
-{% endblock %}
