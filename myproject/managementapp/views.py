@@ -3,8 +3,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .models import *
 from django.urls import reverse
+import calendar
 from django.utils import timezone 
-from .forms import CommentsForm
+from datetime import date
+from django.db.models import F, ExpressionWrapper, IntegerField, DurationField
 
 #login
 def login(request):
@@ -46,12 +48,69 @@ def logout(request):
 
     return redirect('../')
 
+def join(request):
+    template = loader.get_template('join.html')
+    return HttpResponse(template.render({},request))
+
+def join_ok(request):
+    
+    return HttpResponseRedirect(reverse('login'))
+
 #home
 def home(request):
     template = loader.get_template('home.html')
-    
-    return HttpResponse(template.render({},request))
 
+    # 공지사항 공지일 상위 3개 
+    documents = Documents.objects.all().order_by('-udate')[:3]
+
+    # 클래스룸 마감일 상위 3개 
+    today = timezone.now()  # 현재 날짜와 시간을 timezone-aware datetime 객체로 가져옴
+
+    classroom = Assignments.objects.annotate(
+        days_remaining=ExpressionWrapper(
+            F('deadline') - today,  # deadline과 today의 차이를 계산
+            output_field=DurationField()  
+        )
+    ).order_by('days_remaining')[:3]
+    
+    # 클래스룸에서 남은 일수 추출
+    for assignment in classroom:
+    # timedelta에서 .days만 추출하여 저장
+        assignment.days_remaining = assignment.days_remaining.days
+        
+    # 캘린더 
+    today = date.today()  # 날짜 계산을 위해 'today' 다시 정의
+    year = int(request.GET.get('year', today.year))
+    month = int(request.GET.get('month', today.month))
+
+    cal = calendar.Calendar()
+    month_days = cal.itermonthdays4(year, month)
+
+    # 달력 구조 만들기
+    calendar_data = []
+    week = []
+    for day in month_days:
+        if day[1] != month:  # 현재 달이 아닌 날짜는 비어있는 셀로 처리
+            week.append(None)
+        else:
+            week.append(day[2])  # 현재 날짜를 추가
+        if len(week) == 7:  # 한 주가 끝나면 추가
+            calendar_data.append(week)
+            week = []
+    if week:  # 마지막 남은 주 추가
+        calendar_data.append(week)
+
+    context = {
+        'documents': documents,
+        'calendar_data': calendar_data,
+        'year': year,
+        'month': month,
+        'month_name': calendar.month_name[month],
+        'classroom': classroom,
+        'today': today
+    }
+
+    return HttpResponse(template.render(context, request))
 
 #notices
 def notices(request):
