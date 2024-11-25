@@ -53,7 +53,17 @@ def join(request):
     return HttpResponse(template.render({},request))
 
 def join_ok(request):
+    email_front = request.POST.get('email-front', '').strip()
+    email_domain = request.POST.get('email-domain', '').strip()
+    email = f"{email_front}@{email_domain}" if email_front and email_domain else None
+    name = request.POST['name']
+    pwd = request.POST['pwd']
+    generation = request.POST['generation']
+    nowDatetime = timezone.now().strftime('%Y-%m-%d %H:%M:%S')
     
+    member = Member(name=name, email=email, pwd=pwd, generation=generation, rdate=nowDatetime, udate=nowDatetime)
+    member.save()
+
     return HttpResponseRedirect(reverse('login'))
 
 #home

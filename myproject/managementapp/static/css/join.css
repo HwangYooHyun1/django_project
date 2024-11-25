@@ -1,4 +1,4 @@
-.body {
+body {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
@@ -53,4 +53,14 @@
     color: red;
     font-size: 0.8em;
     text-align: left;
+}
+
+.form-container .back-button {
+    background-color: #DEE8FF;
+    color: #3788D8;
+}
+
+.form-container .back-button:hover {
+    background-color: #d5e1fd;
+    color: #3788D8;
 }

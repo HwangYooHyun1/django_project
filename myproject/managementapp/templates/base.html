@@ -11,7 +11,7 @@
   <div class="container">
     <!-- Sidebar -->
     <div class="sidebar">
-      <img class='logo' src="{%static 'logo.png'%}"></img>
+      <img class='logo' src="{%static 'logo.png'%}" onclick="location.href='../../../home/'"></img>
       <img class="profile" src="{%static 'user.png'%}" alt='user'></img>
       {% if request.session.login_ok_user %}
         <div class="compact-container">

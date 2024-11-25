@@ -133,6 +133,6 @@ body {
     bottom: 0;  /* 화면 하단에 위치 */
     right: 0;   /* 화면 오른쪽에 위치 */
     height: auto; /* 이미지 높이 */
-    width: calc(100% - 300px);
+    width: calc(100% - 350px);
     z-index: 10; /* 다른 요소들 위에 표시 */
   }

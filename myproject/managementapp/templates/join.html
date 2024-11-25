@@ -1,87 +1,32 @@
 <!DOCTYPE html>
+{%load static%}
 <html lang="en">
+    <link rel="stylesheet" href="{% static 'css/join.css' %}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>천재IT교육센터 회원가입</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f9f9f9;
-        }
-        .form-container {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            width: 400px;
-            text-align: center;
-        }
-        .form-container h1 {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-        }
-        .form-container form {
-            display: flex;
-            flex-direction: column;
-        }
-        .form-container label {
-            text-align: left;
-            margin-bottom: 5px;
-            font-size: 0.9em;
-            color: #333;
-        }
-        .form-container input,
-        .form-container select,
-        .form-container button {
-            margin-bottom: 15px;
-            padding: 10px;
-            font-size: 1em;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .form-container button {
-            background-color: #4a4aff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-        .form-container button:hover {
-            background-color: #3a3acb;
-        }
-        .form-container .error-message {
-            color: red;
-            font-size: 0.8em;
-            text-align: left;
-        }
-    </style>
 </head>
 <body>
     <div class="form-container">
-        <h2>천재IT교육센터</h2>
+        <img src="{%static 'login_logo.png'%}"></img>
         <br/><br/>
-        <form>
-            <label for="role">수강 수업</label>
-            <select id="role" name="role" required>
+        <form name="input" action="../join_ok/"  onsubmit="return validatePasswords()" method="POST">
+            {% csrf_token %}
+            <label for="">수강 수업</label>
+            <select id="generation" name="generation" required>
                 <option value="" disabled selected>선택하세요</option>
-                <option value="학생">에듀테크 서비스 기획 PM 8기</option>
-                <option value="교사">풀스택 개발 10기</option>
-                <option value="관리자">Back-end 개발 9기</option>
+                <option value="에듀테크 서비스 기획 PM 8기">에듀테크 서비스 기획 PM 8기</option>
+                <option value="풀스택 개발 10기">풀스택 개발 10기</option>
+                <option value="Back-end 개발 9기">Back-end 개발 9기</option>
             </select>
 
-            <label for="username">이름</label>
-            <input type="text" id="username" name="username" placeholder="한글로 공백 없이 입력해주세요." required>
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" placeholder="한글로 공백 없이 입력해주세요." required>
 
             <label for="email">이메일</label>
             <div style="display: flex; gap: 10px;">
-                <input type="email" id="email" name="email" placeholder="이메일 입력" required> 
+                <input type="text" id="email-front" name="email-front" placeholder="이메일 입력" required> 
                 <a>@</a>
                 <select id="email-domain" name="email-domain" required>
                     <option value="" disabled selected>직접입력</option>
@@ -91,8 +36,8 @@
                 </select>
             </div>
 
-            <label for="password">비밀번호</label>
-            <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요." required>
+            <label for="pwd">비밀번호</label>
+            <input type="pwd" id="pwd" name="pwd" placeholder="비밀번호를 입력해주세요." required>
             <div class="error-message">
                 비밀번호는 최소 8자리에서 최대 16자리 숫자, 영문, 특수문자 각 1개 이상 포함
             </div>
@@ -101,7 +46,24 @@
             <input type="password" id="confirm-password" name="confirm-password" placeholder="비밀번호를 다시 입력해주세요." required>
             <br/><br/>
             <button type="submit">회원가입</button>
+            <button class ='back-button' type="button" onclick="location.href='../'">로그인</button>
         </form>
     </div>
 </body>
+
+<script>
+    function validatePasswords() {
+        const password = document.getElementById("pwd").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+    
+        if (password !== confirmPassword) {
+            alert("비밀번호가 일치하지 않습니다.");
+            document.getElementById("confirm-password").value = ""; // confirm-password 필드만 비우기
+            return false; // 폼 제출 방지
+        }
+        alert("회원가입이 성공적으로 이루어졌습니다! 로그인해서 서비스를 이용하세요.");
+        return true; // 폼 제출 진행
+    }
+</script>
+
 </html>

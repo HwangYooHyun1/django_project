@@ -81,7 +81,7 @@
   }
 
   .buttons {
-    float: right;
+    display: inline-block;
     background-color: #DEE8FF;
     color: #3788D8;
     padding: 10px 20px;
