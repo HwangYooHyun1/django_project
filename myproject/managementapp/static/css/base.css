@@ -132,7 +132,7 @@ body {
     position: fixed;
     bottom: 0;  /* 화면 하단에 위치 */
     right: 0;   /* 화면 오른쪽에 위치 */
-    height: auto; /* 이미지 높이 */
-    width: calc(100% - 350px);
+    height: auto; /* 비율을 유지한 채 높이 자동 조절 */
+    width: auto;  /* 너비 자동 조절 */
     z-index: 10; /* 다른 요소들 위에 표시 */
   }
