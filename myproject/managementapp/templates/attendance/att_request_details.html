@@ -4,26 +4,49 @@
 <link rel="stylesheet" href="{% static 'css/content.css' %}">
 <div class="notice-detail-container">
   <!-- 제목 -->
-  <h1 class="notice-title">{{requests.title}}</h1>
+  <h1 class="notice-title">{{ requests.title }}</h1>
   
-  <!-- 요청 사항 세부 내용 (가로배치 및 오른쪽 정렬) -->
+  <!-- 요청 사항 세부 정보 -->
   <div class="notice-info">
-    <p>{{requests.writer}}</p>
+    <p class="writer">{{ requests.writer }}</p>
     <p>|</p>
-    <p>{{requests.rdate}}</p>
+    <p class="rdate">{{ requests.rdate }}</p>
   </div>
   
-  <br/><br/>
-  <div class="notice-content">{{requests.request_date}}</div>
-  <div class="notice-content">{{requests.request_type}}</div>
-  <div class="notice-content">{{requests.content}}</div>
-  <div class="notice-content">{{requests.approval}}</div>
+  <!-- 요청 내용 -->
+  <div class="notice-details">
+    <div class="notice-row">
+      <span class="label">요청 일자</span>
+      <span class="value">{{ requests.request_date }}</span>
+    </div>
+    <div class="notice-row">
+      <span class="label">신청 타입</span>
+      <span class="value">{{ requests.request_type }}</span>
+    </div>
+    <div class="notice-row">
+      <span class="label">내용</span>
+      <span class="value">{{ requests.content }}</span>
+    </div>
+    <div class="notice-row">
+      <span class="label">제출 서류</span>
+      {% if requests.files %}
+          <p class="value">
+            <a href="{{ requests.files.url }}" download="{{ requests.files.name }}">
+              {{ requests.files.name }}
+            </a>
+          </p>
+        {% endif %}
+    </div>
+    <div class="notice-row">
+      <span class="label">승인 여부</span>
+      <span class="value">{{ requests.approval }}</span>
+    </div>
+  </div>
 
-  <!-- 뒤로가기 버튼 -->
+  <!-- 버튼 -->
   <div class="button-container">
-    <button class="buttons" onclick="location.href='../update/{{document.id}}'">수정</button>
+    <button class="buttons" onclick="location.href='../request/update/{{ requests.id }}'">수정</button>
     <button class="buttons" onclick="location.href='../'">페이지 뒤로가기</button>
   </div>
 </div>
-
 {% endblock %}

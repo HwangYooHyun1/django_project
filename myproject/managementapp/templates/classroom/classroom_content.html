@@ -2,61 +2,102 @@
 {%load static%}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/content.css' %}">
-<link rel="stylesheet" href="{% static 'css/comment.css' %}">
+<link rel="stylesheet" href="{% static 'css/comments.css' %}">
+<link rel="stylesheet" href="{% static 'css/delete.css' %}">
 
-<div class="notice-detail-container">
-  <!-- 과제 제목 -->
-  <h1 class="notice-title">{{assignment.title}}</h1>
-  
-  <!-- 과제 정보 (가로배치 및 오른쪽 정렬) -->
-  <div class="notice-info">
-    <p>{{assignment.writer}}</p>
-    <p>|</p>
-    <p>{{assignment.rdate}}</p>
-    <p>|</p>
-    <p>{{assignment.view_count}}</p>
-  </div>
-  <div>
-    <p>마감일: {{assignment.deadline}}</p>
-  </div>
-
-  
-  <br/><br/>
-  <!-- 과제 내용 -->
-  <div class="notice-content">{{assignment.content}}</div>
-</div>
-
-<div class="comments-container">
-    <h3>댓글</h3>
+<div class="content">
+  <div class="notice-detail-container">
+    <!-- 과제 제목 -->
+    <h1 class="notice-title">{{assignment.title}}</h1>
     
-    <!-- 댓글 목록 -->
-    <div class="comments-list">
-      {% for comment in comments %}
-        <div class="comment">
-          <p><strong>{{ comment.author }}</strong> | {{ comment.udate }}</p>
-          <p>{{ comment.content }}</p>
-        </div>
-        <hr />
+    <!-- 과제 정보 (가로배치 및 오른쪽 정렬) -->
+    <div class="notice-info">
+      <p>{{assignment.writer}}</p>
+      <p>|</p>
+      <p>{{assignment.rdate}}</p>
+      <p>|</p>
+      <p>{{assignment.view_count}}</p>
     </div>
-    {%endfor%}
-    <!-- 댓글 입력 폼 -->
-    <form method="POST" action="classroom_comment" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="file-upload-container">
-            <div class="custom-file-upload">
-                <label for="file-upload" class="file-upload-label">파일 선택</label>
-                <input id="file-upload" type="file" name="file" accept=".pdf,.doc,.docx,.jpg,.png,.zip,.rar" />
-            </div>
-            <button type="submit" class="buttons">등록</button>
-        </div>
-    </form>
-    </form>
+    <div class='notice-row'>
+      <p class='label'>마감일</p>
+      <p class ='value'>{{assignment.deadline}}</p>
+    </div>
 
-    <!-- 뒤로가기 버튼 -->
-    <div class="button-container">
-        <button class="buttons" onclick="location.href='../update/{{assignment.id}}'">수정</button>
-        <button class="buttons" onclick="location.href='../'">페이지 뒤로가기</button>
+      <!-- 과제 내용 -->
+    <div class="notice-content">{{assignment.content}}</div>
+  </div>
+
+  <div class="comments-container">
+      <h3>댓글</h3>
+      
+      <!-- 댓글 목록 -->
+      <div class="comments-list">
+        {% for comment in comments %}
+          <div class="comment">
+            <p class='value'><strong>{{ comment.author }}</strong> | {{ comment.udate }}</p>
+            <img class="delete-icon" src="{%static 'delete-button.png'%}" onclick=showPopup({{comment.id}}) ></img>
+            {% if comment.attached %}
+              <p class="value">
+                <a href="{{ comment.attached.url }}" download="{{ comment.attached.name }}">
+                {{ comment.attached.name }}
+                </a>
+              </p>
+           {% endif %}
+          </div>
+          {%endfor%}
+      </div>
+      <!-- 댓글 입력 폼 -->
+      <form method="POST" action="comment_insert" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input type="hidden" name="assignment_id" id="assignment_id" value="{{ assignment.id }}"> 
+          <div class="file-upload-container">
+              <div>
+                <input type="file" name="attached" id="attached" class="input" accept=".pdf,.doc,.docx,.jpg,.png,.zip,.rar">
+            </div>
+              <button type="submit" class="buttons">등록</button>
+          </div>
+      </form>
+
+      <!-- 뒤로가기 버튼 -->
+      <div class="button-container">
+          <button class="buttons" onclick="location.href='../update/{{assignment.id}}'">수정</button>
+          <button class="buttons" onclick="location.href='../'">페이지 뒤로가기</button>
+      </div>
+  </div>
+</div>
+  <!-- 팝업 -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup-box">
+      <p>댓글을 삭제하시면 과제 제출이 취소됩니다.</p>
+      <p>정말로 삭제하시겠습니까?</p>
+      <div class="popup-buttons">
+        <!-- 삭제 버튼의 링크를 동적으로 업데이트 -->
+        <button class="confirm-button" id="delete-confirm-button">삭제</button>
+        <button class="cancel-button" onclick="hidePopup()">취소</button>
+      </div>
     </div>
+  </div>
 </div>
 
+<script>
+  const popup = document.getElementById('popup');
+  const deleteConfirmButton = document.getElementById("delete-confirm-button");
+
+  let currentCommentId = null;
+
+  function showPopup(commentId) {
+    currentCommentId = commentId;
+    deleteConfirmButton.onclick = () => {
+    // 삭제 버튼 클릭 시 해당 댓글 삭제 경로로 이동
+    location.href = `comment_delete/${currentCommentId}`;
+  };
+
+    popup.classList.add('active');
+  }
+
+  function hidePopup() {
+    popup.classList.remove('active');
+  }
+
+</script>
 {% endblock %}

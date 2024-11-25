@@ -11,15 +11,19 @@
   <div class="container">
     <!-- Sidebar -->
     <div class="sidebar">
-      <div class="profile"></div>
+      <img class='logo' src="{%static 'logo.png'%}"></img>
+      <img class="profile" src="{%static 'user.png'%}" alt='user'></img>
       {% if request.session.login_ok_user %}
-      <h2>{{request.session.login_user_generation}}<br>{{request.session.login_user_name}}</h2>
+        <div class="compact-container">
+          <h2>{{request.session.login_user_name}} 님</h2>
+          <h3>{{request.session.login_user_generation}}</h3>
+        </div>   
       {% endif %}
       <ul class="menu">
-        <li><a href="../../home">홈</a></li>
-        <li><a href="../../notices">전체 공지사항</a></li>
-        <li><a href="../../classroom">클래스룸</a></li>
-        <li><a href="../../attendance">출결 관리</a></li>
+        <li><a href="../../../home">홈</a></li>
+        <li><a href="../../../notices">전체 공지사항</a></li>
+        <li><a href="../../../classroom">클래스룸</a></li>
+        <li><a href="../../../attendance">출결 관리</a></li>
       </ul>
     </div>
 
@@ -61,4 +65,7 @@
     });
   </script>
 </body>
+<footer>
+  <img class='footer-image'src='{%static 'footer.png'%}'></img>
+</footer>
 </html>

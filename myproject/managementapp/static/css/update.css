@@ -15,6 +15,31 @@
     margin-bottom: 20px;
   }
 
+  .update-details {
+    margin-top: 40px;
+  }
+  
+  .update-row {
+    display: grid;
+    grid-template-columns: 150px 1fr; /* 두 개의 열을 균등 분할 */
+    gap: 10px; /* 열 사이 간격 */
+    align-items: center;
+    margin-left: 20px;
+  }
+  
+  .update-row .label {
+    font-weight: semibold;
+    color: #666;
+    
+  }
+  
+  .update-row .value {
+    font-weight:semibold;
+    color: #333;
+    flex-direction: column; /* 수직 정렬 */
+    gap: 5px; /* value들 사이의 간격 */
+  }
+
   label {
     font-size: 16px;
     font-weight: bold;

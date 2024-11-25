@@ -4,6 +4,7 @@ from django.template import loader
 from .models import *
 from django.urls import reverse
 from django.utils import timezone 
+from .forms import CommentsForm
 
 #login
 def login(request):
@@ -193,15 +194,22 @@ def classroom_content(request,id):
     return HttpResponse(template.render(context,request))
 
 def classroom_comment(request):
-    assignment = requst.POST['assignment']
+    assignment_id = request.POST['assignment_id']
     author = request.session['login_user_name']
     email = request.session['login_ok_user']
-    content = request.POST['content']
-
-    comments = Comments(assignment=assignment, author=author, email=email, content=content)
+    uploaded_file = request.FILES.get('attached')
+    
+    comments = Comments(assignment_id=assignment_id, author=author, email=email, attached=uploaded_file)
     comments.save()
 
-    return HttpResponseRedirect(reverse('../'))
+    return HttpResponseRedirect(reverse('classroom_content',args=[assignment_id]))
+
+def classroom_comment_delete(request, id):
+    comment = Comments.objects.get(id=id)
+    assignment_id = comment.assignment.id 
+    comment.delete()
+    
+    return HttpResponseRedirect(reverse('classroom_content',args=[assignment_id]))
 
 def classroom_update(request, id):
     template = loader.get_template('classroom/classroom_update.html')
@@ -291,17 +299,56 @@ def att_write(request):
 
     return HttpResponse(template.render({},request))
 
-def att_write_ok(request,id):
+def att_write_ok(request):
     writer = request.session['login_user_name']
     title = '출결 관리 요청'
     content = request.POST['content']
     request_type = request.POST['request_type']
     request_date = request.POST['request_date']
-    files = request.POST['files']
+    files = request.FILES.get('files')
     nowDatetime = timezone.now().strftime('%Y-%m-%d %H:%M:%S')
 
     attendancerequest = AttendanceRequest(writer=writer, title=title, content=content, rdate = nowDatetime,
                                         request_date=request_date, request_type=request_type, files=files)
     attendancerequest.save()
 
+    return HttpResponseRedirect(reverse('attendance'))
+
+def att_request_update(request, id):
+    template = loader.get_template('attendance/att_request_update.html')
+    
+    requests = AttendanceRequest.objects.get(id=id)
+    context = {
+        'requests':requests,
+        "request_type_options": ["휴가", "결석", "지각", "병가", "조퇴", "예비군", "입사 시험", "입사 면접", "자격증", "사망", "외출", "실업 급여 관련 출석", "기타"],
+    }
+
+    return HttpResponse(template.render(context, request))
+
+
+def att_request_update_ok(request, id):
+    
+    content = request.POST['content']
+    request_type = request.POST['request_type']
+    request_date = request.POST['request_date']
+    files = request.FILES.get('files')
+    nowDatetime = timezone.now().strftime('%Y-%m-%d %H:%M:%S')
+    
+    requests = AttendanceRequest.objects.get(id=id)
+    requests.content = content
+    requests.request_date = request_date
+    requests.request_type = request_type
+    requests.files = files
+    requests.rdate = nowDatetime
+    
+    requests.save()
+    
+    return HttpResponseRedirect(reverse('att_request_details',args=[id]))
+
+
+def att_request_delete(request,id):
+    
+    requests = AttendanceRequest.objects.get(id=id)
+    requests.delete()
+    
     return HttpResponseRedirect(reverse('attendance'))

@@ -51,3 +51,27 @@
     background-color: #3788D8;
     color:#FFF;
   }
+
+  .notice-details {
+    margin-top: 40px;
+  }
+  
+  .notice-row {
+    display: grid;
+    grid-template-columns: 100px 1fr; /* 두 개의 열을 균등 분할 */
+    gap: 10px; /* 열 사이 간격 */
+    align-items: center;
+    margin-bottom: 17px; /* 각 행 간격 */
+    margin-left: 20px;
+  }
+  
+  .notice-row .label {
+    font-weight: semibold;
+    color: #666;
+  }
+  
+  .notice-row .value {
+    font-weight:semibold;
+    color: #333;
+  }
+  

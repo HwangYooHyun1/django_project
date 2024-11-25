@@ -7,7 +7,7 @@
   <div class="edit-notice-container">
     <h1>출결 관련 신청란</h1>
 
-    <form name="input" action="../write_ok" method="POST">
+    <form name="input" action="../write_ok" method="POST" enctype="multipart/form-data">
     {% csrf_token %} 
       <div class="form-group">
         <label>작성자 : {{request.session.login_user_name}}</label>
@@ -41,7 +41,7 @@
       <div class="form-group">
         <div class="custom-file-upload">
             <label for="file-upload" class="file-upload-label">파일 선택</label>
-            <input id="files" type="file" name="files" accept=".pdf,.doc,.docx,.jpg,.png,.zip,.rar" />
+            <input type="file" name="files" id="files" accept=".pdf,.doc,.docx,.jpg,.png,.zip,.rar"/>
         </div>
     </div>
       <div class="button-container">
