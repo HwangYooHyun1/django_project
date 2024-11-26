@@ -92,7 +92,7 @@
                         {% for assignment in classroom %}
                         <tr>
                             <td>{{ assignment.id }}</td>
-                            <td><a href="../notices/content/{{ assignment.id }}" style="text-decoration:none">{{ assignment.title }}</a></td>
+                            <td><a href="../classroom/content/{{ assignment.id }}" style="text-decoration:none">{{ assignment.title }}</a></td>
                             <td>마감<br/> DAY-{{ assignment.days_remaining }} </td>
                         </tr>
                         {% endfor %}

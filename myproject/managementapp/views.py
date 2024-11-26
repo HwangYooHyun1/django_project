@@ -6,7 +6,7 @@ from django.urls import reverse
 import calendar
 from django.utils import timezone 
 from datetime import date
-from django.db.models import F, ExpressionWrapper, IntegerField, DurationField
+from django.db.models import F, ExpressionWrapper,  DurationField
 
 #login
 def login(request):
@@ -137,15 +137,17 @@ def notice_search(request):
     template = loader.get_template('notices/notices.html')
 
     search = request.GET.get('search','') #기본값 = ''
-    print('search:',search)
     if search:
         #title_icontains: 대소문자 구분없이 문자열이 존재하는지 확인
         documents = Documents.objects.filter(title__icontains=search)
+        count = len(documents)
     else:
         documents = Documents.objects.all()
+        count = len(documents)
 
     context = {
-        'documents':documents
+        'documents':documents,
+        'count': count
     }
 
     return HttpResponse(template.render(context,request))
@@ -219,15 +221,17 @@ def classroom_search(request):
     template = loader.get_template('classroom/classroom.html')
 
     search = request.GET.get('search','') #기본값 = ''
-    print('search:',search)
     if search:
         #title_icontains: 대소문자 구분없이 문자열이 존재하는지 확인
         assignments = Assignments.objects.filter(title__icontains=search)
+        count = len(assignments)
     else:
         assignments = Assignments.objects.all()
+        count = len(assignments)
 
     context = {
-        'assignments':assignments
+        'assignments':assignments,
+        'count': count
     }
 
     return HttpResponse(template.render(context,request))

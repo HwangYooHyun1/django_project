@@ -19,6 +19,7 @@
         <div class='update-row'>
         <label class='label'>작성자</label>
           <p class='value'>{{requests.writer}}</p> <!-- 작성자는 수정 불가 -->
+          <br/>
         </div>
         <div class='update-row'>
           <label class='label' >요청 유형</label> 
@@ -28,14 +29,17 @@
               {{ option }}</option>
               {% endfor %}
             </select>
+            <br/>
           </div>
       <div class='update-row'>
         <label class='label' >요청 일자</label> <!-- 작성일은 수정 불가 -->
           <input class='value' type="date" name="request_date" value="{{ requests.request_date|date:'Y-m-d' }}" ></input>
-      </div>
+          <br/>
+        </div>
       <div class="update-row">
         <label class='label' for="content">내용</label>
         <textarea id="content" name="content" rows="5" required>{{requests.content}}</textarea>
+        <br/>
       </div>
       <div class="update-row">
         <label class='label' for="content">제출 서류</label>
@@ -43,6 +47,7 @@
         <p class='value'>현재 파일: <a href="{{ requests.files.url }}" target="_blank">{{ requests.files.name }}</a></p>
         {% endif %}
         <input class='value' type="file" name="files" accept=".pdf,.doc,.docx,.jpg,.png,.zip,.rar" required></input>
+        <br/>
       </div>
     </div>
       <div class="button-container">

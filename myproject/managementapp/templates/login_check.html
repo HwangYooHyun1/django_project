@@ -1,0 +1,7 @@
+{% if not request.session.login_ok_user %}
+    <Script language='javascript'>
+        alert('로그인이 필요한 서비스입니다.');
+        location.href="../";
+    </script>
+
+{% endif %}

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-w%8cgy50f3a)yrqbdt94kyh1a_=1@voe0$uqo9+724r)ve0qr0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.41.0.92','127.0.0.1','localhost']
 
 
 DATE_INPUT_FORMATS  = ['%d-%m-%Y'] #달력 기능 추가 
