@@ -93,7 +93,12 @@
                         <tr>
                             <td>{{ assignment.id }}</td>
                             <td><a href="../classroom/content/{{ assignment.id }}" style="text-decoration:none">{{ assignment.title }}</a></td>
+                            {%if assignment.days_remaining > 0 %}
                             <td>마감<br/> DAY-{{ assignment.days_remaining }} </td>
+                            {%else%}
+                            <td style="color:red">마감<br/> D-DAY</td>
+                            {%endif%}
+
                         </tr>
                         {% endfor %}
                     </tbody>

@@ -5,8 +5,10 @@ from .models import *
 from django.urls import reverse
 import calendar
 from django.utils import timezone 
-from datetime import date
+from datetime import date, timedelta
+from django.utils.timezone import now
 from django.db.models import F, ExpressionWrapper,  DurationField
+from django.db.models.functions import TruncDate
 
 #login
 def login(request):
@@ -73,16 +75,17 @@ def home(request):
     # 공지사항 공지일 상위 3개 
     documents = Documents.objects.all().order_by('-udate')[:3]
 
-    # 클래스룸 마감일 상위 3개 
-    today = timezone.now()  # 현재 날짜와 시간을 timezone-aware datetime 객체로 가져옴
+    #클래스룸 마감일 상위 3개 
+    today = now().date()  # 현재 날짜
 
-    classroom = Assignments.objects.annotate(
-        days_remaining=ExpressionWrapper(
-            F('deadline') - today,  # deadline과 today의 차이를 계산
-            output_field=DurationField()  
-        )
+    classroom = Assignments.objects.filter(
+        deadline__gte=today  # 마감일이 오늘 날짜 이후인 항목
+    ).annotate(
+        deadline_date=TruncDate('deadline')  # deadline을 날짜로 변환 (시간 부분 제거)
+    ).annotate(
+        days_remaining=F('deadline_date') - today  # 남은 시간 계산 (날짜 차이)
     ).order_by('days_remaining')[:3]
-    
+
     # 클래스룸에서 남은 일수 추출
     for assignment in classroom:
     # timedelta에서 .days만 추출하여 저장
