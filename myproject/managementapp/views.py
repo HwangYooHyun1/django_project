@@ -125,6 +125,17 @@ def home(request):
 
     return HttpResponse(template.render(context, request))
 
+def myinfo(request):
+    template = loader.get_template('myinfo.html')
+
+    email = request.session['login_ok_user']
+    member = Member.objects.get(email=email)
+    
+    context = {
+        'member' : member
+    }
+
+    return HttpResponse(template.render(context,request))
 #notices
 def notices(request):
     template = loader.get_template('notices/notices.html')

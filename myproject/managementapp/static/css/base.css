@@ -95,10 +95,12 @@ body {
   .header .account:hover {
     color: #000;
   }
+  /* 드롭다운 메뉴 스타일 */
+/* 드롭다운 메뉴 스타일 */
   .dropdown {
     position: absolute;
     top: 100%;
-    right: 20px;
+    right: 0;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #ddd;
@@ -106,16 +108,25 @@ body {
     display: none;
     flex-direction: column;
     width: 150px;
+    overflow: hidden; /* 컨테이너 밖으로 내용이 넘치지 않도록 설정 */
   }
+
+  /* 드롭다운 메뉴 항목 스타일 */
   .dropdown a {
     padding: 10px;
     text-decoration: none;
     color: #333;
     text-align: center;
+    display: block;
   }
+
+  /* 마우스를 올렸을 때 스타일 */
   .dropdown a:hover {
-    background-color: #f0f0f0;
+    background-color: #f0f0f0; /* 칸 내부에서만 색상 변경 */
+    color: #000;
   }
+
+
 
   /* 메인 콘텐츠 영역 */
   .main-content {

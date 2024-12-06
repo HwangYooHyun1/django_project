@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/myinfo.css' %}">
+<title>나의 정보</title>
+<div class="content">
+   
+    <div class="profile-container">
+        <div class="profile-header">
+          <h2>기본정보</h2>
+          <ul class="tab-menu">
+            <li class="active">기본정보</li>
+          </ul>
+        </div>
+          <div class="profile-image">
+            <img src="{% static 'user.png' %}" alt="프로필 사진">
+            <p>{{member.generation}}<br>{{member.name}}</p>
+          </div>
+          <div class="profile-details">
+            <table>
+              <tr>
+                <th>가입일자</th>
+                <td>{{member.rdate}}</td>
+              </tr>
+              <tr>
+                <th>이메일</th>
+                <td>{{member.email}}</td>
+              </tr>
+                <th>비밀번호</th>
+                <td>{{member.pwd}}</td>
+              </tr>
+            </table>
+          </div>
+        <div class="profile-footer">
+          <button class="btn-edit">기본정보 수정</button>
+          <button class="btn-password">비밀번호 변경</button>
+        </div>
+      </div>      
+</div>
+{% endblock %}

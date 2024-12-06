@@ -11,6 +11,7 @@ urlpatterns = [
     
     #home
     path('home/',views.home, name='home'),
+    path('myinfo/',views.myinfo, name='myinfo'),
     #notices
     path('notices/',views.notices, name='notices'),
     path('notices/write/',views.notice_write, name='notice_write'),

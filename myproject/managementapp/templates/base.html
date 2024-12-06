@@ -33,6 +33,7 @@
       <div class="account" onclick="toggleDropdown()">
         {{request.session.login_user_name}} 님 ▼
         <div class="dropdown" id="dropdown-menu">
+          <a href="../myinfo/">나의정보</a>
           {%if request.session.login_ok_user %}
           <a href="../logout" >로그아웃</a>
           {%else%}
