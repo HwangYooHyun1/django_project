@@ -126,16 +126,54 @@ def home(request):
     return HttpResponse(template.render(context, request))
 
 def myinfo(request):
-    template = loader.get_template('myinfo.html')
+    template = loader.get_template('myinfo/myinfo.html')
 
     email = request.session['login_ok_user']
     member = Member.objects.get(email=email)
-    
     context = {
         'member' : member
     }
+    return HttpResponse(template.render(context,request))
+
+def myinfo_update(request):
+    template = loader.get_template('myinfo/myinfo_update.html')
+
+    email = request.session['login_ok_user']
+    member = Member.objects.get(email=email)
+    email_front = email.split('@')[0]
+    email_domain = email.split('@')[1]
+    domain_list = ["gmail.com", "naver.com", "daum.net"]
+
+    context = {
+        'member' : member,
+        'email_front' : email_front,
+        'email_domain' : email_domain,
+        'domain_list': domain_list
+    }
 
     return HttpResponse(template.render(context,request))
+
+def myinfo_update_ok(request):
+    email = request.session['login_ok_user']
+    member = Member.objects.get(email=email)
+
+    member.name = request.POST['name']
+    nowDatetime = timezone.now().strftime('%Y-%m-%d %H:%M:%S')
+    member.rdate = nowDatetime
+    member.save()
+
+    request.session['login_user_name'] = member.name 
+
+    return HttpResponseRedirect(reverse('myinfo'))
+
+def myinfo_pwd_update(request):
+
+    return HttpResponse(template.render({},request))
+
+def myinfo_pwd_update_ok(request):
+    
+    return HttpResponseRedirect(reverse('myinfo'))
+
 #notices
 def notices(request):
     template = loader.get_template('notices/notices.html')

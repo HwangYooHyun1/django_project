@@ -11,7 +11,11 @@ urlpatterns = [
     
     #home
     path('home/',views.home, name='home'),
+
+    #myinfo
     path('myinfo/',views.myinfo, name='myinfo'),
+    path('myinfo/update', views.myinfo_update, name='myinfo_update'),
+    path('myinfo/update_ok', views.myinfo_update_ok, name='myinfo_update_ok'),
     #notices
     path('notices/',views.notices, name='notices'),
     path('notices/write/',views.notice_write, name='notice_write'),

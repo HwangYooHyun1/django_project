@@ -11,6 +11,24 @@
     margin: 0 auto; /* 수평 중앙 정렬 */
 }
 
+.tab-menu {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .tab-menu li {
+    margin: 0 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .tab-menu .active {
+    border-bottom: 2px solid #007BFF;
+  }
+  
 .profile-header {
     text-align: center;
     margin-bottom: 20px;
@@ -44,3 +62,16 @@
     margin-top: 20px;
     text-align: center; /* 버튼 중앙 정렬 */
 }
+.btn-edit, .btn-password {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    }
+      
+.btn-edit:hover, .btn-password:hover {
+    background-color: #0056b3;
+    }
+
